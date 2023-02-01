@@ -147,6 +147,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
     photoGallery,
   } = document;
   const [paymentOption, setPaymentOption] = useState(0);
+  const [variants, setVariants] = useState(0);
   return (
     <>
       <ProductDetailSchema document={cpy} />
@@ -199,8 +200,13 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                           <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
                             {c_variants.map((item: string, index: number) => (
                               <div
+                                onClick={() => setVariants(index)}
                                 key={index}
-                                className="flex justify-center items-center rounded-full border border-gray-300 px-4 py-2 text-sm text-center"
+                                className={`hover:cursor-default flex justify-center items-center rounded-full border  px-4 py-2 text-sm text-center ${
+                                  index === variants
+                                    ? "border-black"
+                                    : "border-gray-300 "
+                                }`}
                               >
                                 {item}
                               </div>
@@ -219,7 +225,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                                 <span key={index}>
                                   <div
                                     onClick={() => setPaymentOption(index)}
-                                    className={`border px-4 pt-2 pb-8 text-sm text-center ${
+                                    className={`hover:cursor-default border px-4 pt-2 pb-8 text-sm text-center ${
                                       index === paymentOption
                                         ? "border-black"
                                         : "border-gray-300 "
