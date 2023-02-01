@@ -32,7 +32,7 @@ import { Image } from "@yext/pages/components";
 import StarRating from "../components/starRating";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
-import Schema from "../components/Schema";
+import ProductDetailSchema from "../components/Schemas/productDetailSchema";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
@@ -131,7 +131,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
   path,
   document,
 }) => {
-  const { cpy } = document;
+  const cpy = document;
   const {
     _site,
     landingPageUrl,
@@ -149,7 +149,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
   const [paymentOption, setPaymentOption] = useState(0);
   return (
     <>
-      <Schema document={cpy} />
+      <ProductDetailSchema document={cpy} />
       <PageLayout _site={_site}>
         <div className="centered-container !max-w-screen-2xl">
           <div className="section">
@@ -198,7 +198,10 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                           </div>
                           <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
                             {c_variants.map((item: string, index: number) => (
-                              <div className="flex justify-center items-center rounded-full border border-gray-300 px-4 py-2 text-sm text-center">
+                              <div
+                                key={index}
+                                className="flex justify-center items-center rounded-full border border-gray-300 px-4 py-2 text-sm text-center"
+                              >
                                 {item}
                               </div>
                             ))}
@@ -213,10 +216,9 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                           <div className="mt-4 grid grid-cols-2 md:grid-cols-2 gap-4">
                             {c_paymentOptions.map(
                               (item: any, index: number) => (
-                                <>
+                                <span key={index}>
                                   <div
                                     onClick={() => setPaymentOption(index)}
-                                    key={index}
                                     className={`border px-4 pt-2 pb-8 text-sm text-center ${
                                       index === paymentOption
                                         ? "border-black"
@@ -236,7 +238,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                                       </div>
                                     </div>
                                   </div>
-                                </>
+                                </span>
                               )
                             )}
                           </div>
