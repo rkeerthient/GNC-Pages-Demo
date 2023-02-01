@@ -32,6 +32,7 @@ import { Image } from "@yext/pages/components";
 import StarRating from "../components/starRating";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
+import Schema from "../components/Schema";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
@@ -130,6 +131,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
   path,
   document,
 }) => {
+  const { cpy } = document;
   const {
     _site,
     landingPageUrl,
@@ -147,6 +149,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
   const [paymentOption, setPaymentOption] = useState(0);
   return (
     <>
+      <Schema document={cpy} />
       <PageLayout _site={_site}>
         <div className="centered-container !max-w-screen-2xl">
           <div className="section">
@@ -154,6 +157,13 @@ const ProductDetail: Template<TemplateRenderProps> = ({
               <div className="pt-6 pb-16 sm:pb-24">
                 <div className="mx-auto mt-8  px-4 sm:px-6  lg:px-8">
                   <div className="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-3">
+                    <div className="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
+                      <h2 className="sr-only">Images</h2>
+
+                      <div className="m-auto">
+                        <Image image={photoGallery[0]}></Image>
+                      </div>
+                    </div>
                     <div className="lg:col-span-5 lg:col-start-8">
                       <div>
                         <h1 className="text-xl font-medium text-gray-900">
@@ -324,15 +334,6 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                         </div>
                       </div>
                       <hr className="my-4" />
-                    </div>
-
-                    {/* Image gallery */}
-                    <div className="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
-                      <h2 className="sr-only">Images</h2>
-
-                      <div className="m-auto">
-                        <Image image={photoGallery[0]}></Image>
-                      </div>
                     </div>
                   </div>
                 </div>
