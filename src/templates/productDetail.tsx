@@ -32,7 +32,7 @@ import { Image } from "@yext/pages/components";
 import StarRating from "../components/starRating";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
-import ProductDetailSchema from "../components/Schemas/productDetailSchema";
+import ProductDetailSchema from "../Schemas/productDetailSchema";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
