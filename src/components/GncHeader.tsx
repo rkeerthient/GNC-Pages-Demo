@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Category, MobileMenu } from "./MobileMenu";
+import { Category, MobileMenu } from "./mobile/MobileMenu";
 import { useState } from "react";
 import {
   Bars3Icon,
@@ -9,80 +9,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { CategoryPanel } from "./CategoryPanel";
 import { ComplexImageType } from "@yext/pages/components";
-
-const root = {
-  id: "shoes",
-  subCategories: [
-    {
-      id: "shop",
-      name: "SHOP",
-      subCategories: [
-        { id: "1", name: "Herbs & Natural Supplements", href: "#" },
-        { id: "2", name: "Food Drink & Prepared Meals", href: "#" },
-        { id: "3", name: "Weight Management", href: "#" },
-        { id: "4", name: "Performance", href: "#" },
-        { id: "5", name: "Vitamins & Supplements", href: "#" },
-        { id: "6", name: "Equipment & Accessories", href: "#" },
-        { id: "7", name: "Protein Supplements", href: "#" },
-        { id: "8", name: "Beauty & Skin Care", href: "#" },
-        { id: "9", name: "Superfoods & Green Food", href: "#" },
-        { id: "10", name: "Digestion", href: "#" },
-        { id: "11", name: "New Arrivals", href: "#" },
-        {
-          id: "12",
-          name: "Best Sellers",
-          href: "#",
-          subCategories: [
-            { id: "13", name: "Protein", href: "#" },
-            { id: "14", name: "Herbs & Greens", href: "#" },
-            { id: "15", name: "Vitamins & Supplements", href: "#" },
-            { id: "16", name: "Food & Drink", href: "#" },
-          ],
-        },
-      ],
-    },
-    { id: "routines", name: "GNC Routines", href: "#" },
-    {
-      id: "brands",
-      name: "BRANDS",
-      subCategories: [
-        {
-          id: "17",
-          name: "Everything",
-          href: "#",
-          logo: {
-            url: "https://cdn-fsly.yottaa.net/5b9fc7760b534475fab84ce9/www.gnc.com/v~4b.8a/on/demandware.static/-/Sites-site-catalog-gnc-2-us/default/dwfd929f72/brand-menu_gnc-rd.svg?yocs=19_1d_",
-            width: 300,
-            height: 113,
-          },
-        },
-        { id: "18", name: "Core", href: "#" },
-        { id: "19", name: "New Arrivals", href: "#" },
-        { id: "20", name: "Sale", href: "#" },
-      ],
-    },
-    {
-      id: "deals",
-      name: "DEALS",
-      // dm_directoryChildren: [
-      //   { name: "Everything", href: "#" },
-      //   { name: "Core", href: "#" },
-      //   { name: "New Arrivals", href: "#" },
-      //   { name: "Sale", href: "#" },
-      // ],
-    },
-    {
-      id: "gnc-routines",
-      name: "GNC ROUTINES",
-      // dm_directoryChildren: [
-      //   { name: "Everything", href: "#" },
-      //   { name: "Core", href: "#" },
-      //   { name: "New Arrivals", href: "#" },
-      //   { name: "Sale", href: "#" },
-      // ],
-    },
-  ],
-};
+import { MobileSearch } from "./mobile/MobileSearch";
+import { Image } from "@yext/pages/components";
 
 export type HeaderProps = {
   rootCategory: Category;
@@ -91,18 +19,33 @@ export type HeaderProps = {
 
 const Header = ({ rootCategory }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+
+  const handleSearchIconClick = () => {
+    setMobileSearchOpen(!mobileSearchOpen);
+  };
 
   return (
     <div className="bg-white">
+      <MobileSearch open={mobileSearchOpen} setOpen={setMobileSearchOpen} />
       <MobileMenu
         category={rootCategory}
         open={mobileMenuOpen}
         setOpen={setMobileMenuOpen}
       />
-      <header className="relative bg-white">
+      <header className="relative bg-white z-10">
+        <div className="absolute right-0 left-0 -z-10 ">
+          <div className="h-16 flex justify-center items-center">
+            <div>
+              {rootCategory.logo && (
+                <Image className="h-8 w-auto" image={rootCategory.logo} />
+              )}
+            </div>
+          </div>
+        </div>
         <nav aria-label="Top" className="mx-auto px-6 ">
           <div className="">
-            <div className="flex h-16 items-center justify-between">
+            <div className="h-16 items-center justify-between grid grid-cols-2">
               <div className="flex flex-1 items-center lg:hidden">
                 <button
                   type="button"
@@ -113,58 +56,50 @@ const Header = ({ rootCategory }: HeaderProps) => {
                   <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                <a
-                  href="#"
+                <button
+                  onClick={() => handleSearchIconClick()}
                   className="ml-2 p-2 text-gray-400 hover:text-gray-500"
                 >
                   <span className="sr-only">Search</span>
                   <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                </a>
+                </button>
               </div>
 
               <CategoryPanel rootCategory={rootCategory} />
 
-              {/* Logo */}
-              <a href="#" className="flex">
-                <span className="sr-only">Your Company</span>
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
-                />
-              </a>
-
-              <div className="flex flex-1 items-center justify-end">
-                {/* Search */}
-                <a
-                  href="#"
-                  className="ml-6 hidden p-2 text-gray-400 hover:text-gray-500 lg:block"
-                >
-                  <span className="sr-only">Search</span>
-                  <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                </a>
-
-                {/* Account */}
-                <a
-                  href="#"
-                  className="p-2 text-gray-400 hover:text-gray-500 lg:ml-4"
-                >
-                  <span className="sr-only">Account</span>
-                  <UserIcon className="h-6 w-6" aria-hidden="true" />
-                </a>
-
-                {/* Cart */}
-                <div className="ml-4 flow-root lg:ml-6">
-                  <a href="#" className="group -m-2 flex items-center p-2">
-                    <ShoppingBagIcon
-                      className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+              <div className="flex">
+                <div className="flex flex-1 items-center justify-end">
+                  {/* Search */}
+                  <button className="ml-6 hidden p-2 text-gray-400 hover:text-gray-500 lg:block">
+                    <span className="sr-only">Search</span>
+                    <MagnifyingGlassIcon
+                      className="h-6 w-6"
                       aria-hidden="true"
                     />
-                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      0
-                    </span>
-                    <span className="sr-only">items in cart, view bag</span>
+                  </button>
+
+                  {/* Account */}
+                  <a
+                    href="#"
+                    className="p-2 text-gray-400 hover:text-gray-500 lg:ml-4"
+                  >
+                    <span className="sr-only">Account</span>
+                    <UserIcon className="h-6 w-6" aria-hidden="true" />
                   </a>
+
+                  {/* Cart */}
+                  <div className="ml-4 flow-root lg:ml-6">
+                    <a href="#" className="group -m-2 flex items-center p-2">
+                      <ShoppingBagIcon
+                        className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                        aria-hidden="true"
+                      />
+                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                        0
+                      </span>
+                      <span className="sr-only">items in cart, view bag</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

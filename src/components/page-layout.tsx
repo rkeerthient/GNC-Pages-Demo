@@ -1,19 +1,31 @@
+import {
+  provideHeadless,
+  SearchHeadlessProvider,
+} from "@yext/search-headless-react";
 import * as React from "react";
-import { Header, HeaderProps } from "./GncHeader";
-import { Category } from "./MobileMenu";
+import { Header } from "./GncHeader";
+import { Category } from "./mobile/MobileMenu";
 
 type Props = {
   _site: Category;
   children?: React.ReactNode;
 };
 
+const searcher = provideHeadless({
+  apiKey: YEXT_PUBLIC_SEARCH_API_KEY,
+  experienceKey: "gnc-demo",
+  locale: "en",
+});
+
 const PageLayout = ({ _site, children }: Props) => {
   return (
-    <div className="min-h-screen">
-      <Header rootCategory={_site} />
-      {children}
-      {/* <Footer _site={_site}></Footer> */}
-    </div>
+    <SearchHeadlessProvider searcher={searcher}>
+      <div className="min-h-screen">
+        <Header rootCategory={_site} />
+        {children}
+        {/* <Footer _site={_site}></Footer> */}
+      </div>
+    </SearchHeadlessProvider>
   );
 };
 

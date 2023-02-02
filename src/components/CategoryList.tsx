@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { Category } from "./MobileMenu";
+import { Category } from "./mobile/MobileMenu";
 
 type CategoryProps = {
   panelIdx: number;

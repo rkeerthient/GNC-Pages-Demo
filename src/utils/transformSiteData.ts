@@ -1,5 +1,5 @@
 import { ComplexImageType } from "@yext/pages/components";
-import { Category } from "../components/MobileMenu";
+import { Category } from "../components/mobile/MobileMenu";
 
 // I have the followng data structure:
 type dm_directoryChild = {

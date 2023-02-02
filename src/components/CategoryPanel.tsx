@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Fragment, useEffect } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { Category } from "./MobileMenu";
+import { Category } from "./mobile/MobileMenu";
 import { twMerge } from "tailwind-merge";
 import { CategoryList } from "./CategoryList";
 
