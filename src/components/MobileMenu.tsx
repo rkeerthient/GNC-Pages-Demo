@@ -4,7 +4,7 @@ import { useState, Fragment } from "react";
 import { XMarkIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ComplexImageType, Image, ImageType } from "@yext/pages/components";
 
-type Category = {
+export type Category = {
   id: string;
   name?: string;
   href?: string;

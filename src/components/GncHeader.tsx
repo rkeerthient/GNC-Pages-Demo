@@ -1,28 +1,13 @@
 import * as React from "react";
-import { Image, Link } from "@yext/pages/components";
-import type { CTA, Image as ImageType } from "@yext/types";
 import { MobileMenu } from "./MobileMenu";
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
   ShoppingBagIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
+import { CategoryPanel } from "./CategoryPanel";
 
 const root = {
   id: "shoes",
@@ -98,14 +83,16 @@ const root = {
   ],
 };
 
-const Test = () => {
-  const [open, setOpen] = useState(false);
+const Header = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="bg-white">
-      {/* Mobile menu */}
-      <MobileMenu category={root} open={open} setOpen={setOpen} />
-
+      <MobileMenu
+        category={root}
+        open={mobileMenuOpen}
+        setOpen={setMobileMenuOpen}
+      />
       <header className="relative bg-white">
         <nav
           aria-label="Top"
@@ -117,7 +104,7 @@ const Test = () => {
                 <button
                   type="button"
                   className="-ml-2 rounded-md bg-white p-2 text-gray-400"
-                  onClick={() => setOpen(true)}
+                  onClick={() => setMobileMenuOpen(true)}
                 >
                   <span className="sr-only">Open menu</span>
                   <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -132,6 +119,8 @@ const Test = () => {
                 </a>
               </div>
 
+              <CategoryPanel rootCategory={root} />
+
               {/* Logo */}
               <a href="#" className="flex">
                 <span className="sr-only">Your Company</span>
@@ -143,19 +132,6 @@ const Test = () => {
               </a>
 
               <div className="flex flex-1 items-center justify-end">
-                <a
-                  href="#"
-                  className="hidden text-gray-700 hover:text-gray-800 lg:flex lg:items-center"
-                >
-                  <img
-                    src="https://tailwindui.com/img/flags/flag-canada.svg"
-                    alt=""
-                    className="block h-auto w-5 flex-shrink-0"
-                  />
-                  <span className="ml-3 block text-sm font-medium">CAD</span>
-                  <span className="sr-only">, change currency</span>
-                </a>
-
                 {/* Search */}
                 <a
                   href="#"
@@ -196,4 +172,4 @@ const Test = () => {
   );
 };
 
-export { Test };
+export { Header };

@@ -12,7 +12,6 @@ import {
 } from "@yext/pages";
 import PageLayout from "../components/page-layout";
 import { ExternalImage } from "../types/ExternalImage";
-import { Test } from "../components/Test";
 
 /**
  * Used to either alter or augment the props passed into the template at render time.
@@ -68,10 +67,7 @@ type ExternalImageRenderData = TemplateRenderProps & {
 const Static: Template<TemplateRenderProps> = ({ document }) => {
   return (
     <>
-      <PageLayout>
-        {/* <Header /> */}
-        <Test />
-      </PageLayout>
+      <PageLayout></PageLayout>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Header } from "./header";
+import { Header } from "./GncHeader";
 
 type Props = {
   children?: React.ReactNode;
@@ -8,7 +8,7 @@ type Props = {
 const PageLayout = ({ children }: Props) => {
   return (
     <div className="min-h-screen">
-      {/* <Header /> */}
+      <Header />
       {children}
       {/* <Footer _site={_site}></Footer> */}
     </div>
