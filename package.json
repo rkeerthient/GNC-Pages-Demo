@@ -21,9 +21,12 @@
     "node": ">=17"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.8",
+    "@heroicons/react": "^2.0.14",
     "@types/react-slick": "^0.23.10",
     "@yext/search-headless-react": "^2.1.0",
     "@yext/search-ui-react": "^1.1.0",
+    "@yext/types": "^0.1.11-alpha",
     "font-awesome": "^4.7.0",
     "react": "^17.0.2",
     "react-accessible-accordion": "^5.0.0",
