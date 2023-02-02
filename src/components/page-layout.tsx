@@ -1,14 +1,16 @@
 import * as React from "react";
-import { Header } from "./GncHeader";
+import { Header, HeaderProps } from "./GncHeader";
+import { Category } from "./MobileMenu";
 
 type Props = {
+  _site: Category;
   children?: React.ReactNode;
 };
 
-const PageLayout = ({ children }: Props) => {
+const PageLayout = ({ _site, children }: Props) => {
   return (
     <div className="min-h-screen">
-      <Header />
+      <Header rootCategory={_site} />
       {children}
       {/* <Footer _site={_site}></Footer> */}
     </div>

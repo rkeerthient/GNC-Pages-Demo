@@ -39,10 +39,8 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
         <div className="relative flex">
           <Popover.Button
             className={twMerge(
-              open
-                ? "border-indigo-600 text-indigo-600"
-                : "border-transparent text-gray-700 hover:text-gray-800",
-              "relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
+              open ? "border-black" : "border-transparent",
+              "relative z-10 -mb-px flex items-center border-b-4 pt-px text-sm font-semibold transition-colors duration-200 ease-out text-black"
             )}
           >
             {category.name}
@@ -59,12 +57,13 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
           leaveTo="opacity-0"
         >
           <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm max-w-7xl mx-auto">
-            <div className="relative sm:px-6 lg:px-8 flex">
+            <div className="relative flex">
               <CategoryList
                 panelIdx={0}
                 category={category}
                 handleSubCategoryClick={handleSubCategoryClick}
               />
+              {/* TODO: add animation and 3rd panel */}
               {sidePanels.length > 0 &&
                 sidePanels.map((sidePanel, sidePanelIdx) => (
                   <CategoryList
@@ -83,7 +82,7 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
   return (
     <div className="hidden h-full lg:flex">
       {/* Mega menus */}
-      <Popover.Group className="ml-8">
+      <Popover.Group className="ml-2">
         <div className="flex h-full justify-center space-x-8">
           {rootCategory?.subCategories?.map((category) => (
             <Popover key={category.name} className="flex">

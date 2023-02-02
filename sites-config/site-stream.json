@@ -1,10 +1,21 @@
 {
   "$id": "site-entity",
   "filter": {
-    "entityIds": ["7089236598532783488"]
+    "entityIds": ["dm3"]
   },
   "source": "knowledgeGraph",
-  "fields": ["name"],
+  "fields": [
+    "c_logo",
+    "dm_directoryChildren.id",
+    "dm_directoryChildren.name",
+    "dm_directoryChildren.dm_directoryChildren.id",
+    "dm_directoryChildren.dm_directoryChildren.name",
+    "dm_directoryChildren.dm_directoryChildren.slug",
+    "dm_directoryChildren.dm_directoryChildren.c_logo",
+    "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.id",
+    "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.name",
+    "dm_directoryChildren.dm_directoryChildren.dm_directoryChildren.slug"
+  ],
   "localization": {
     "locales": ["en"],
     "primary": false

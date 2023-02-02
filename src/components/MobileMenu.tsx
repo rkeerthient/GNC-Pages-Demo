@@ -8,7 +8,7 @@ export type Category = {
   id: string;
   name?: string;
   href?: string;
-  logo?: ComplexImageType | ImageType;
+  logo?: ComplexImageType;
   subCategories?: Category[];
 };
 
@@ -75,7 +75,7 @@ const MobileMenu = ({ category, open, setOpen }: MobileMenuProps) => {
                   <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
-              {currentCategory.name && (
+              {currentCategory?.name && (
                 <div className="flex px-2 py-2 space-x-4">
                   {previousCategories.length > 0 && (
                     <button type="button" onClick={handleBackClick}>
@@ -85,35 +85,40 @@ const MobileMenu = ({ category, open, setOpen }: MobileMenuProps) => {
                   <p className="font-bold text-2xl">{currentCategory.name}</p>
                 </div>
               )}
-              {currentCategory.subCategories?.map((subCategory, sectionIdx) => (
-                <button
-                  key={sectionIdx}
-                  className="px-4 py-2"
-                  onClick={() => handleSubCategoryClick(subCategory)}
-                >
-                  <div key={subCategory.name} className="flex justify-between">
-                    <p
-                      id={`${subCategory.id}-heading-mobile`}
-                      className="font-semibold text-gray-900 text-lg"
+              {currentCategory?.subCategories?.map(
+                (subCategory, sectionIdx) => (
+                  <button
+                    key={sectionIdx}
+                    className="px-4 py-2"
+                    onClick={() => handleSubCategoryClick(subCategory)}
+                  >
+                    <div
+                      key={subCategory.name}
+                      className="flex justify-between"
                     >
-                      {subCategory.name}
-                    </p>
-                    {subCategory.subCategories && (
-                      <ChevronRightIcon className="h-6 w-6" />
-                    )}
-                    {subCategory.logo && (
-                      // <Image
-                      //   width={125}
-                      //   height={80}
-                      //   layout="fixed"
-                      //   image={subCategory.logo}
-                      // />
-                      // TODO: fix image
-                      <></>
-                    )}
-                  </div>
-                </button>
-              ))}
+                      <p
+                        id={`${subCategory.id}-heading-mobile`}
+                        className="font-semibold text-gray-900 text-lg"
+                      >
+                        {subCategory.name}
+                      </p>
+                      {subCategory.subCategories && (
+                        <ChevronRightIcon className="h-6 w-6" />
+                      )}
+                      {subCategory.logo && (
+                        // <Image
+                        //   width={125}
+                        //   height={80}
+                        //   layout="fixed"
+                        //   image={subCategory.logo}
+                        // />
+                        // TODO: fix image
+                        <></>
+                      )}
+                    </div>
+                  </button>
+                )
+              )}
             </Dialog.Panel>
           </Transition.Child>
         </div>

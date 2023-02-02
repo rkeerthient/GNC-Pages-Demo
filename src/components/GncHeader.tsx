@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MobileMenu } from "./MobileMenu";
+import { Category, MobileMenu } from "./MobileMenu";
 import { useState } from "react";
 import {
   Bars3Icon,
@@ -8,6 +8,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/outline";
 import { CategoryPanel } from "./CategoryPanel";
+import { ComplexImageType } from "@yext/pages/components";
 
 const root = {
   id: "shoes",
@@ -83,22 +84,24 @@ const root = {
   ],
 };
 
-const Header = () => {
+export type HeaderProps = {
+  rootCategory: Category;
+  logo?: ComplexImageType;
+};
+
+const Header = ({ rootCategory }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="bg-white">
       <MobileMenu
-        category={root}
+        category={rootCategory}
         open={mobileMenuOpen}
         setOpen={setMobileMenuOpen}
       />
       <header className="relative bg-white">
-        <nav
-          aria-label="Top"
-          className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-        >
-          <div className="border-b border-gray-200">
+        <nav aria-label="Top" className="mx-auto px-6 ">
+          <div className="">
             <div className="flex h-16 items-center justify-between">
               <div className="flex flex-1 items-center lg:hidden">
                 <button
@@ -119,7 +122,7 @@ const Header = () => {
                 </a>
               </div>
 
-              <CategoryPanel rootCategory={root} />
+              <CategoryPanel rootCategory={rootCategory} />
 
               {/* Logo */}
               <a href="#" className="flex">

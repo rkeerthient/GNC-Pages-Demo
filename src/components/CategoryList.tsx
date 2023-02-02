@@ -16,7 +16,7 @@ const CategoryList = ({
   handleSubCategoryClick,
 }: CategoryProps) => {
   return (
-    <div className="w-1/3 px-8 bg-white shadow">
+    <div className="w-1/3 px-8 bg-white shadow overflow-y-auto max-h-[calc(100vh-64px)]">
       <ul role="list" className="py-4 space-y-6 sm:space-y-4 flex flex-col">
         {category.subCategories?.map((subCat) => (
           <button
