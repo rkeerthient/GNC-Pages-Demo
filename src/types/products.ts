@@ -31,6 +31,7 @@ export interface ComplexImage {
 
 export default interface Ce_product {
 	landingPageUrl?: string,
+	slug?: string,
 	description?: string,
 	name: string,
 	c_parentCategory?: EntityReference[],

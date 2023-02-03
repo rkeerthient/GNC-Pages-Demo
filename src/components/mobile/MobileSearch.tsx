@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import { SearchBar } from "@yext/search-ui-react";
+import { SearchBar } from "../SearchBar";
 
 type MobileSearchProps = {
   open: boolean;
@@ -29,7 +28,7 @@ const MobileSearch = ({ open, setOpen }: MobileSearchProps) => {
                 leaveTo="translate-y-full"
               >
                 <Dialog.Panel className="pointer-events-auto w-screen ">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-stone-100 py-6 shadow-xl">
+                  <div className="flex h-full flex-col overflow-y-scroll bg-stone-100 py-6 shadow-xl relative">
                     <div className="px-4 sm:px-6">
                       <SearchBar />
                     </div>
