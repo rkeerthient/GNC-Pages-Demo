@@ -40,7 +40,7 @@ const Header = ({ rootCategory }: HeaderProps) => {
         open={mobileMenuOpen}
         setOpen={setMobileMenuOpen}
       />
-      <header className="relative bg-white z-10">
+      <header className="relative bg-white z-20">
         {/* <Transition
           show={searchOpen}
           enter="transition ease-in-out duration-300 transform"

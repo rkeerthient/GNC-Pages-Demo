@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { Category } from "./mobile/MobileMenu";
 import { twMerge } from "tailwind-merge";
@@ -10,12 +10,17 @@ type CategoryPanelProps = {
 };
 
 const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
-  const [popoverOpen, setPopoverOpen] = React.useState(false);
-  const [sidePanels, setSidePanels] = React.useState<Category[]>([]);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const [sidePanels, setSidePanels] = useState<Category[]>([]);
+  const [activeCategory, setActiveCategory] = useState("");
 
   const handleSubCategoryClick = (subCategory: Category, panelIdx: number) => {
-    if (panelIdx === sidePanels.length && subCategory.subCategories) {
-      setSidePanels([...sidePanels, subCategory]);
+    if (subCategory.subCategories) {
+      if (panelIdx === sidePanels.length) {
+        setSidePanels([...sidePanels, subCategory]);
+      } else {
+        setSidePanels(sidePanels.slice(0, panelIdx).concat(subCategory));
+      }
     }
   };
 
@@ -36,12 +41,27 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
     setPopoverOpen(open);
     return (
       <>
-        <div className="relative flex">
+        {/* div that is gray with an opacity of 50 and goes under the popover when open and closes the popover when clicked */}
+        {/* <div
+          className={twMerge(
+            open ? "opacity-50" : "opacity-0",
+            "fixed top-16 bottom-0 left-0 right-0 bg-gray-500 -z-10 h-full"
+          )}
+          onClick={() => setPopoverOpen(false)}
+        /> */}
+
+        <div className="relative flex z-10">
           <Popover.Button
             className={twMerge(
-              open ? "border-black" : "border-transparent",
+              activeCategory === category.name
+                ? "border-black"
+                : "border-transparent",
               "relative z-10 -mb-px flex items-center border-b-4 pt-px text-sm font-semibold transition-colors duration-200 ease-out text-black"
             )}
+            onMouseEnter={() => {
+              setSidePanels([]);
+              setActiveCategory(category.name || "");
+            }}
           >
             {category.name}
           </Popover.Button>
@@ -49,6 +69,7 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
 
         <Transition
           as={Fragment}
+          show={activeCategory === category.name}
           enter="transition ease-out duration-200"
           enterFrom="opacity-0"
           enterTo="opacity-100"
@@ -56,7 +77,7 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm max-w-7xl mx-auto">
+          <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm ">
             <div className="relative flex">
               <CategoryList
                 panelIdx={0}
@@ -80,18 +101,30 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
   };
 
   return (
-    <div className="hidden h-full lg:flex">
-      {/* Mega menus */}
-      <Popover.Group className="ml-2">
-        <div className="flex h-full justify-center space-x-8">
-          {rootCategory?.subCategories?.map((category) => (
-            <Popover key={category.name} className="flex">
-              {({ open }) => renderPopoverContents(category, open)}
-            </Popover>
-          ))}
-        </div>
-      </Popover.Group>
-    </div>
+    <>
+      {activeCategory !== "" && (
+        // TODO: fade out
+        <div
+          className="fixed top-16 bottom-0 left-0 right-0 bg-gray-500 z-10 h-full opacity-40"
+          onMouseEnter={() => {
+            setSidePanels([]);
+            setActiveCategory("");
+          }}
+        />
+      )}
+      <div className="hidden h-full lg:flex">
+        {/* Mega menus */}
+        <Popover.Group className="ml-2">
+          <div className="flex h-full justify-center space-x-8">
+            {rootCategory?.subCategories?.map((category) => (
+              <Popover key={category.name} className="flex">
+                {({ open }) => renderPopoverContents(category, open)}
+              </Popover>
+            ))}
+          </div>
+        </Popover.Group>
+      </div>
+    </>
   );
 };
 

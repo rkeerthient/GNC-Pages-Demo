@@ -16,13 +16,13 @@ const CategoryList = ({
   handleSubCategoryClick,
 }: CategoryProps) => {
   return (
-    <div className="w-1/3 px-8 bg-white shadow overflow-y-auto max-h-[calc(100vh-64px)]">
-      <ul role="list" className="py-4 space-y-6 sm:space-y-4 flex flex-col">
+    <div className="w-1/3 bg-white shadow overflow-y-auto max-h-[calc(100vh-64px)] z-50">
+      <ul role="list" className="py-4 flex flex-col">
         {category.subCategories?.map((subCat) => (
-          <button
+          <div
             key={`${subCat.id}-desktop`}
-            className="px-4"
-            onClick={() =>
+            className="px-4 py-2 hover:bg-gray-200"
+            onMouseEnter={() =>
               handleSubCategoryClick && subCat.subCategories
                 ? handleSubCategoryClick(subCat, panelIdx)
                 : null
@@ -48,7 +48,7 @@ const CategoryList = ({
                 <></>
               )}
             </div>
-          </button>
+          </div>
         ))}
       </ul>
     </div>
