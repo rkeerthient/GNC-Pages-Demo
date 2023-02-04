@@ -13,11 +13,9 @@ const MobileSearch = ({ open, setOpen }: MobileSearchProps) => {
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10 lg:hidden" onClose={setOpen}>
         <div className="fixed inset-0 top-16" />
-
         <div className="fixed inset-0 top-16 overflow-hidden">
           <div className="absolute inset-0 top-16 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 top-16 right-0 left-0 flex max-w-full ">
-              {/* tailwind class for #f5f5f5 */}
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -30,7 +28,7 @@ const MobileSearch = ({ open, setOpen }: MobileSearchProps) => {
                 <Dialog.Panel className="pointer-events-auto w-screen ">
                   <div className="flex h-full flex-col overflow-y-scroll bg-stone-100 py-6 shadow-xl relative">
                     <div className="px-4 sm:px-6">
-                      <SearchBar />
+                      <SearchBar mobile />
                     </div>
                   </div>
                 </Dialog.Panel>
