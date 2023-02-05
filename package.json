@@ -22,9 +22,11 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.8",
+    "@heroicons/react": "^2.0.14",
     "@types/react-slick": "^0.23.10",
     "@yext/search-headless-react": "^2.1.0",
     "@yext/search-ui-react": "^1.1.0",
+    "@yext/types": "^0.1.11-alpha",
     "font-awesome": "^4.7.0",
     "mapbox-gl": "^2.12.0",
     "react": "^17.0.2",
@@ -35,7 +37,8 @@
     "react-showdown": "^2.3.1",
     "react-slick": "^0.29.0",
     "schema-dts": "^1.1.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "tailwind-merge": "^1.9.0"
   },
   "devDependencies": {
     "@types/mapbox-gl": "^2.7.10",
@@ -44,7 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "@vitejs/plugin-react": "^2.1.0",
-    "@yext/pages": "1.0.0-beta.6",
+    "@yext/pages": "1.0.0-beta.16",
     "autoprefixer": "^10.4.8",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.7",
