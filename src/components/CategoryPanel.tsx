@@ -41,15 +41,6 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
     setPopoverOpen(open);
     return (
       <>
-        {/* div that is gray with an opacity of 50 and goes under the popover when open and closes the popover when clicked */}
-        {/* <div
-          className={twMerge(
-            open ? "opacity-50" : "opacity-0",
-            "fixed top-16 bottom-0 left-0 right-0 bg-gray-500 -z-10 h-full"
-          )}
-          onClick={() => setPopoverOpen(false)}
-        /> */}
-
         <div className="relative flex z-10">
           <Popover.Button
             className={twMerge(
@@ -77,8 +68,14 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm ">
-            <div className="relative flex">
+          <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm z-50">
+            <div
+              className="relative flex"
+              onMouseLeave={() => {
+                setSidePanels([]);
+                setActiveCategory("");
+              }}
+            >
               <CategoryList
                 panelIdx={0}
                 category={category}
@@ -104,13 +101,7 @@ const CategoryPanel = ({ rootCategory }: CategoryPanelProps) => {
     <>
       {activeCategory !== "" && (
         // TODO: fade out
-        <div
-          className="fixed top-16 bottom-0 left-0 right-0 bg-gray-500 z-10 h-full opacity-40"
-          onMouseEnter={() => {
-            setSidePanels([]);
-            setActiveCategory("");
-          }}
-        />
+        <div className="fixed top-16 bottom-0 left-0 right-0 bg-gray-500 z-10 h-full opacity-40" />
       )}
       <div className="hidden h-full lg:flex">
         {/* Mega menus */}

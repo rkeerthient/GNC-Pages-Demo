@@ -96,48 +96,12 @@ const Header = ({ rootCategory }: HeaderProps) => {
               {!searchOpen && <CategoryPanel rootCategory={rootCategory} />}
 
               <div className={twMerge("flex", searchOpen ? "col-span-2" : "")}>
-                <div className="flex flex-1 items-center justify-end">
+                <div className="sm:flex flex-1 items-center justify-end hidden">
                   {/* Search */}
-                  {searchOpen ? (
-                    <div className="my-auto max-w-sm w-full">
-                      <SearchBar
-                        customCssClasses={{ searchBarContainer: "mb-0" }}
-                      />
-                    </div>
-                  ) : (
-                    <button
-                      className="ml-6 hidden p-2 text-gray-400 hover:text-gray-500 lg:block"
-                      onClick={() => handleSearchIconClick()}
-                    >
-                      <span className="sr-only">Search</span>
-                      <MagnifyingGlassIcon
-                        className="h-6 w-6"
-                        aria-hidden="true"
-                      />
-                    </button>
-                  )}
-
-                  {/* Account */}
-                  <a
-                    href="#"
-                    className="p-2 text-gray-400 hover:text-gray-500 lg:ml-4"
-                  >
-                    <span className="sr-only">Account</span>
-                    <UserIcon className="h-6 w-6" aria-hidden="true" />
-                  </a>
-
-                  {/* Cart */}
-                  <div className="ml-4 flow-root lg:ml-6">
-                    <a href="#" className="group -m-2 flex items-center p-2">
-                      <ShoppingBagIcon
-                        className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                        aria-hidden="true"
-                      />
-                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                        0
-                      </span>
-                      <span className="sr-only">items in cart, view bag</span>
-                    </a>
+                  <div className="my-auto max-w-xs w-full">
+                    <SearchBar
+                      customCssClasses={{ searchBarContainer: "mb-0 " }}
+                    />
                   </div>
                 </div>
               </div>
