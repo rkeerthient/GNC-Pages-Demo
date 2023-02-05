@@ -1,7 +1,7 @@
 import * as React from "react";
 
-const HoursText = ({ document }: any) => {
-  const { hours, timezone } = document;
+const HoursText = ({ hours, timezone }: any) => {
+  // const { hours, timezone } = document;
 
   const getStatus = (currentDay: any, currentTime: any, hours: any) => {
     if (hours[currentDay.toLowerCase()].isClosed)
@@ -84,23 +84,23 @@ const HoursText = ({ document }: any) => {
   return (
     <div className="hero mt-4 w-full">
       <div className="hero-row flex">
-        <div
-          className={
-            res.status.includes("Open")
-              ? "text-2xl text-gray-600 Hero-hoursToday storeOpen flex gap-1 items-center w-max "
-              : "text-2xl text-gray-600 Hero-hoursToday storeClosed flex gap-1 items-center w-max "
-          }
-        >
-          <p className="">
-            {res.status === "Open now"
-              ? "Open Now - "
-              : res.status === "Closed"
+        <div className="flex">
+          <p
+            className={
+              res.status.includes("Open")
+                ? "font-bold Hero-hoursToday storeOpen flex gap-1 items-center w-max "
+                : "font-bold Hero-hoursToday storeClosed flex gap-1 items-center w-max "
+            }
+          >
+            {res.status.toLowerCase() === "open now"
+              ? "Open Now -"
+              : res.status.toLowerCase() === "closed"
               ? "Closed  - "
               : res.status === "Closed perm"
               ? "Closed"
               : ""}
           </p>
-          {res.status !== "Closed perm" && res.text}
+          &nbsp;{res.status !== "Closed perm" && res.text}
         </div>
       </div>
     </div>
