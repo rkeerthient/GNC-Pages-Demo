@@ -48,12 +48,12 @@ const StoreLocator = (): JSX.Element => {
     setMapBounds(bounds);
     setShowSearchAreaButton(true);
   };
-  const windowDimensions = useWindowDimensions();
-  useEffect(() => {
-    if (windowDimensions && windowDimensions.width > 768) {
-      setShowResults(true);
-    }
-  }, [windowDimensions]);
+  // const windowDimensions = useWindowDimensions();
+  // useEffect(() => {
+  //   if (windowDimensions && windowDimensions.width > 768) {
+  //     setShowResults(true);
+  //   }
+  // }, [windowDimensions]);
 
   const handleSearchAreaClick = () => {
     if (mapCenter && mapBounds) {
