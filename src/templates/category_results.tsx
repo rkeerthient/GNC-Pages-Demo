@@ -88,6 +88,14 @@ const CategoryResults: Template<TemplateRenderProps> = ({
     value: name,
   };
 
+  const breadcrumbs = document.dm_directoryParents?.slice(1).map((parent) => {
+    return {
+      name: parent.name,
+      href: parent.slug,
+      current: false,
+    };
+  });
+
   return (
     <>
       <PageLayout _site={_site}>
@@ -95,6 +103,7 @@ const CategoryResults: Template<TemplateRenderProps> = ({
           initialFilter={initialFilter}
           initialVerticalKey={"products"}
           categoryName={name}
+          breadcrumbLinks={breadcrumbs}
         />
       </PageLayout>
     </>

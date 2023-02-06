@@ -8,17 +8,20 @@ import { useEffect, useState } from "react";
 import { UniversalResults, universalResultsConfig } from "./UniversalResults";
 import { VerticalNavigator } from "./VerticalNavigator";
 import { VerticalResults } from "./VerticalResults";
+import { Breadcrumbs, Link } from "../Breadcrumbs";
 
 type SearchResultsProps = {
   initialFilter?: FieldValueStaticFilter;
   initialVerticalKey?: string;
   categoryName?: string;
+  breadcrumbLinks?: Link[];
 };
 
 const SearchResults = ({
   initialFilter,
   initialVerticalKey,
   categoryName,
+  breadcrumbLinks,
 }: SearchResultsProps) => {
   const searchActions = useSearchActions();
   const [urlQuery, setUrlQuery] = useState<string | null>(null);
@@ -97,6 +100,7 @@ const SearchResults = ({
 
   return (
     <div className="py-4">
+      {breadcrumbLinks && <Breadcrumbs links={breadcrumbLinks} />}
       {renderPageHeading()}
       {!initialFilter && <VerticalNavigator verticals={verticals} />}
       {isUniversalSearch && <UniversalResults />}
