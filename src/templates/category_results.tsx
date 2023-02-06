@@ -37,8 +37,8 @@ export const config: TemplateConfig = {
   },
 };
 
-export const getPath: GetPath<TemplateRenderProps> = () => {
-  return `results`;
+export const getPath: GetPath<TemplateRenderProps> = ({ document }) => {
+  return document.slug ?? document.name;
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
