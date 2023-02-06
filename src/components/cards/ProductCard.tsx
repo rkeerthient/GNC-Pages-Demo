@@ -12,14 +12,8 @@ const ProductCard = ({ result, autocomplete }: ProductCardProps) => {
   const product = result.rawData;
   const productImage = product.photoGallery?.[0];
 
-  const handleProductClick = () => {
-    if (product.slug) {
-      window.location.href = product.slug;
-    }
-  };
-
   return (
-    <button className="p-4 hover:bg-gray-100" onClick={handleProductClick}>
+    <a className="p-4 hover:bg-gray-100" href={product.slug}>
       <div
         className={twMerge(
           "inline-flex flex-col",
@@ -41,7 +35,7 @@ const ProductCard = ({ result, autocomplete }: ProductCardProps) => {
           {/* <p className="ml-2 mb-2 pt-1">{`$${product.c_price}`}</p> */}
         </div>
       </div>
-    </button>
+    </a>
   );
 };
 

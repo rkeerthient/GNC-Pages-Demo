@@ -129,9 +129,13 @@ const SearchBar = ({ customCssClasses, mobile = false }: SearchBarProps) => {
                 <div key="categories" className="p-4 sm:order-first">
                   <p className="mb-4 font-bold">CATEGORIES</p>
                   {categoryResults.map((result) => (
-                    <p key={result.id} className="mb-4 text-sm">
+                    <a
+                      key={result.id}
+                      className="mb-4 text-sm hover:underline"
+                      href={result.rawData.slug}
+                    >
                       {result.name}
-                    </p>
+                    </a>
                   ))}
                 </div>
               );
