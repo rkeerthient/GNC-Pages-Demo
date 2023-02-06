@@ -1,12 +1,7 @@
 import * as React from "react";
 import { Category, MobileMenu } from "./mobile/MobileMenu";
 import { useState } from "react";
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-  ShoppingBagIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { CategoryPanel } from "./CategoryPanel";
 import { ComplexImageType } from "@yext/pages/components";
 import { MobileSearch } from "./mobile/MobileSearch";
@@ -96,7 +91,7 @@ const Header = ({ rootCategory }: HeaderProps) => {
               {!searchOpen && <CategoryPanel rootCategory={rootCategory} />}
 
               <div className={twMerge("flex", searchOpen ? "col-span-2" : "")}>
-                <div className="sm:flex flex-1 items-center justify-end hidden">
+                <div className="flex-1 items-center justify-end hidden lg:flex ">
                   {/* Search */}
                   <div className="my-auto max-w-xs w-full">
                     <SearchBar

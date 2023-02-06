@@ -1,3 +1,8 @@
+export interface EntityReference {
+	entityId: string,
+	name: string,
+}
+
 export interface ImageThumbnail {
 	url: string,
 	width: number,
@@ -19,8 +24,15 @@ export interface ComplexImage {
 	clickthroughUrl?: string,
 }
 
-export default interface Ce_product {
+export default interface Ce_root {
 	slug?: string,
 	name: string,
-	photoGallery?: ComplexImage[],
+	dm_baseEntityCount?: string,
+	dm_childEntityIds?: string[],
+	dm_directoryChildren?: EntityReference[],
+	dm_directoryChildrenCount?: string,
+	dm_directoryManagerId?: string,
+	dm_directoryParents?: EntityReference[],
+	c_logo?: ComplexImage,
+	id: string,
 }

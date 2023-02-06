@@ -30,12 +30,13 @@ const CategoryList = ({
             // TODO: see if you can figure out hover instead of click
           >
             <div className="flex justify-between">
-              <p
+              <a
                 id={`${subCat.id}-heading-mobile`}
-                className="font-semibold text-gray-900 text-base text-left"
+                className="font-semibold text-gray-900 text-base text-left hover:underline"
+                href={subCat.href}
               >
                 {subCat.name}
-              </p>
+              </a>
               {subCat.subCategories && <ChevronRightIcon className="h-6 w-6" />}
               {subCat.logo && (
                 // <Image

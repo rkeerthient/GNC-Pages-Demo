@@ -96,12 +96,13 @@ const MobileMenu = ({ category, open, setOpen }: MobileMenuProps) => {
                       key={subCategory.name}
                       className="flex justify-between"
                     >
-                      <p
+                      <a
                         id={`${subCategory.id}-heading-mobile`}
-                        className="font-semibold text-gray-900 text-lg"
+                        className="font-semibold text-gray-900 text-lg hover:underline"
+                        href={subCategory.href}
                       >
                         {subCategory.name}
-                      </p>
+                      </a>
                       {subCategory.subCategories && (
                         <ChevronRightIcon className="h-6 w-6" />
                       )}
