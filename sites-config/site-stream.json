@@ -8,6 +8,7 @@
     "c_logo",
     "dm_directoryChildren.id",
     "dm_directoryChildren.name",
+    "dm_directoryChildren.slug",
     "dm_directoryChildren.dm_directoryChildren.id",
     "dm_directoryChildren.dm_directoryChildren.name",
     "dm_directoryChildren.dm_directoryChildren.slug",

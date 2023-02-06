@@ -80,7 +80,7 @@ const SearchBar = ({ customCssClasses, mobile = false }: SearchBarProps) => {
                   index === self.findIndex((p) => p.name === product.name)
               )
               .map((result) => (
-                <ProductCard key={result.id} result={result} />
+                <ProductCard key={result.id} result={result} autocomplete />
               ))}
           </div>
         </div>
@@ -153,9 +153,23 @@ const SearchBar = ({ customCssClasses, mobile = false }: SearchBarProps) => {
     );
   };
 
+  const handleSearch = (searchEventData: {
+    verticalKey?: string;
+    query?: string;
+  }) => {
+    // replace the url with /results?query=${query}
+    // this will trigger a page refresh and the results page will be rendered
+    const { verticalKey, query } = searchEventData;
+    const url = new URL(window.location.href);
+    url.pathname = "/results";
+    url.searchParams.set("query", query || "");
+    window.location.href = url.toString();
+  };
+
   return (
     <SB
       customCssClasses={customCssClasses}
+      onSearch={handleSearch}
       visualAutocompleteConfig={{
         entityPreviewSearcher: visualSearcher,
         includedVerticals: ["products", "articles", "categories"],
