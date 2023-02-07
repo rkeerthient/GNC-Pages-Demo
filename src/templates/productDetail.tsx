@@ -33,6 +33,7 @@ import StarRating from "../components/starRating";
 import { AiOutlineCheck } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import ProductDetailSchema from "../Schemas/productDetailSchema";
+import { Breadcrumbs, Link } from "../components/Breadcrumbs";
 /**
  * Required when Knowledge Graph data is used for a template.
  */
@@ -49,7 +50,6 @@ export const config: TemplateConfig = {
       "landingPageUrl",
       "description",
       "name",
-      "c_parentCategory",
       "c_paymentOptions",
       "c_price",
       "c_rating",
@@ -57,6 +57,14 @@ export const config: TemplateConfig = {
       "c_salePrice",
       "c_variants",
       "photoGallery",
+      "c_parentCategory.name",
+
+      "c_parentCategory.slug",
+
+      "c_parentCategory.dm_directoryParents.name",
+      "c_parentCategory.dm_directoryParents.slug",
+      "c_parentCategory.dm_directoryChildren.name",
+      "c_parentCategory.dm_directoryChildren.slug",
     ],
     // Defines the scope of entities that qualify for this stream.
     filter: {
@@ -148,6 +156,21 @@ const ProductDetail: Template<TemplateRenderProps> = ({
   } = document;
   const [paymentOption, setPaymentOption] = useState(0);
   const [variants, setVariants] = useState(0);
+  let breadcrumbs = c_parentCategory[0].dm_directoryParents
+    ?.slice(1)
+    .map((parent) => {
+      return {
+        name: parent.name,
+        href: parent.slug,
+        current: false,
+      };
+    });
+
+  let x = c_parentCategory.map(function (item: any) {
+    return { name: item.name, href: item.slug, current: false };
+  });
+  breadcrumbs.push(x[0]);
+
   return (
     <>
       <ProductDetailSchema document={cpy} />
@@ -160,7 +183,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                   <div className="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-3">
                     <div className="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
                       <h2 className="sr-only">Images</h2>
-
+                      <Breadcrumbs links={breadcrumbs} />
                       <div className="m-auto">
                         <Image image={photoGallery[0]}></Image>
                       </div>
