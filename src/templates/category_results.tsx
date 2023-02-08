@@ -96,6 +96,13 @@ const CategoryResults: Template<TemplateRenderProps> = ({
     };
   });
 
+  const subCategoryLinks = document.dm_directoryChildren?.map((child) => {
+    return {
+      name: child.name,
+      href: child.slug,
+    };
+  });
+
   return (
     <>
       <PageLayout _site={_site}>
@@ -103,7 +110,8 @@ const CategoryResults: Template<TemplateRenderProps> = ({
           initialFilter={initialFilter}
           initialVerticalKey={"products"}
           categoryName={name}
-          breadcrumbLinks={breadcrumbs}
+          breadcrumbLinks={breadcrumbs.concat({ name })}
+          subCategoryLinks={subCategoryLinks}
         />
       </PageLayout>
     </>

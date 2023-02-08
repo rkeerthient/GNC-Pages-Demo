@@ -9,12 +9,15 @@ import { UniversalResults, universalResultsConfig } from "./UniversalResults";
 import { VerticalNavigator } from "./VerticalNavigator";
 import { VerticalResults } from "./VerticalResults";
 import { Breadcrumbs, Link } from "../Breadcrumbs";
+import { DepartmentList } from "./DepartmentList";
+import { SortDropdown } from "./SortDropdown";
 
 type SearchResultsProps = {
   initialFilter?: FieldValueStaticFilter;
   initialVerticalKey?: string;
   categoryName?: string;
   breadcrumbLinks?: Link[];
+  subCategoryLinks?: Link[];
 };
 
 const SearchResults = ({
@@ -22,6 +25,7 @@ const SearchResults = ({
   initialVerticalKey,
   categoryName,
   breadcrumbLinks,
+  subCategoryLinks,
 }: SearchResultsProps) => {
   const searchActions = useSearchActions();
   const [urlQuery, setUrlQuery] = useState<string | null>(null);
@@ -38,6 +42,8 @@ const SearchResults = ({
     (state) => state.meta.searchType === "universal"
   );
   const verticalKey = useSearchState((state) => state.vertical.verticalKey);
+  const resultsCount = useSearchState((state) => state.vertical.resultsCount);
+  const searchLoading = useSearchState((state) => state.searchStatus.isLoading);
 
   // when this component is mounted, grab the query from the URL and perform a search
   useEffect(() => {
@@ -79,32 +85,30 @@ const SearchResults = ({
     }
   }, [universalResults]);
 
-  const renderPageHeading = () => {
-    if (urlQuery) {
-      return (
-        <div className="flex justify-center ">
-          <h1 className="py-5 ">
-            You Searched For...
-            <span className="font-semibold">{`"${urlQuery}"`}</span>
-          </h1>
-        </div>
-      );
-    } else if (categoryName) {
-      return (
-        <div className="flex justify-center ">
-          <h1 className="py-5 font-semibold">{categoryName.toUpperCase()}</h1>
-        </div>
-      );
-    }
-  };
-
   return (
-    <div className="py-4">
+    <div className="p-4">
       {breadcrumbLinks && <Breadcrumbs links={breadcrumbLinks} />}
-      {renderPageHeading()}
       {!initialFilter && <VerticalNavigator verticals={verticals} />}
       {isUniversalSearch && <UniversalResults />}
-      {verticalKey && <VerticalResults verticalKey={verticalKey} />}
+      {verticalKey && (
+        <div className="flex py-4">
+          <div className="w-1/5">
+            <DepartmentList departmentLinks={subCategoryLinks} />
+          </div>
+          <div className="w-4/5">
+            <div className="flex justify-between">
+              <div className="flex space-x-4 items-center">
+                <h2 className="text-2xl font-semibold">{categoryName}</h2>
+                {!searchLoading && (
+                  <p className="text-xs text-gray-500">{`(${resultsCount} Results)`}</p>
+                )}
+              </div>
+              <SortDropdown />
+            </div>
+            <VerticalResults verticalKey={verticalKey} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

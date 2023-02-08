@@ -20,7 +20,7 @@ const searcher = provideHeadless({
 const PageLayout = ({ _site, children }: Props) => {
   return (
     <SearchHeadlessProvider searcher={searcher}>
-      <div className="min-h-screen">
+      <div className="min-h-screen max-w-[1440px] mx-auto">
         <Header rootCategory={_site} />
         {children}
         {/* <Footer _site={_site}></Footer> */}
