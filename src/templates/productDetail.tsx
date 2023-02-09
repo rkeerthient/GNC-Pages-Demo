@@ -156,7 +156,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
   } = document;
   const [paymentOption, setPaymentOption] = useState(0);
   const [variants, setVariants] = useState(0);
-  let breadcrumbs = c_parentCategory[0].dm_directoryParents
+  const breadcrumbs = c_parentCategory?.[0].dm_directoryParents
     ?.slice(1)
     .map((parent) => {
       return {
@@ -166,7 +166,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
       };
     });
 
-  let x = c_parentCategory.map(function (item: any) {
+  const x = c_parentCategory?.map(function (item: any) {
     return { name: item.name, href: item.slug, current: false };
   });
   breadcrumbs.push(x[0]);
@@ -185,7 +185,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                       <h2 className="sr-only">Images</h2>
                       <Breadcrumbs links={breadcrumbs} />
                       <div className="m-auto">
-                        <Image image={photoGallery[0]}></Image>
+                        <Image image={photoGallery?.[0]}></Image>
                       </div>
                     </div>
                     <div className="lg:col-span-5 lg:col-start-8">
@@ -195,7 +195,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                         </h1>
                         {c_paymentOptions && (
                           <p className="text-xl font-medium text-gray-900">
-                            ${c_paymentOptions[0].price}
+                            ${c_paymentOptions?.[0].price}
                           </p>
                         )}
                       </div>
@@ -221,7 +221,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                             CHOOSE FLAVOR
                           </div>
                           <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
-                            {c_variants.map((item: string, index: number) => (
+                            {c_variants?.map((item: string, index: number) => (
                               <div
                                 onClick={() => setVariants(index)}
                                 key={index}
