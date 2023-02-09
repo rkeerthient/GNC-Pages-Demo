@@ -243,7 +243,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
                             Buying options
                           </div>
                           <div className="mt-4 grid grid-cols-2 md:grid-cols-2 gap-4">
-                            {c_paymentOptions.map(
+                            {c_paymentOptions?.map(
                               (item: any, index: number) => (
                                 <span key={index}>
                                   <div
