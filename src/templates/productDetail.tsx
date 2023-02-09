@@ -169,7 +169,7 @@ const ProductDetail: Template<TemplateRenderProps> = ({
   const x = c_parentCategory?.map(function (item: any) {
     return { name: item.name, href: item.slug, current: false };
   });
-  breadcrumbs.push(x[0]);
+  breadcrumbs?.push(x[0]);
 
   return (
     <>
