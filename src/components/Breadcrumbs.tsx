@@ -7,14 +7,14 @@ export type Link = {
 };
 
 type BreadcrumbsProps = {
-  links: Link[];
+  links?: Link[];
 };
 
 const Breadcrumbs = ({ links }: BreadcrumbsProps) => {
   return (
     <nav className="flex py-5" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-4 mb-4">
-        {links.map((link, idx) => (
+        {links?.map((link, idx) => (
           <li key={link.name}>
             <div className="flex items-center">
               {idx !== 0 && (
