@@ -18,6 +18,7 @@ const Header = ({ rootCategory }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [visAutoOpen, setVisAutoOpen] = useState(false);
 
   const handleMobileSearchIconClick = () => {
     setMobileSearchOpen(!mobileSearchOpen);
@@ -95,7 +96,14 @@ const Header = ({ rootCategory }: HeaderProps) => {
                   {/* Search */}
                   <div className="my-auto max-w-xs w-full">
                     <SearchBar
-                      customCssClasses={{ searchBarContainer: "mb-0 " }}
+                      setVisAutoOpen={setVisAutoOpen}
+                      customCssClasses={{
+                        searchBarContainer: "mb-0 ",
+                        recentSearchesIcon: "hidden",
+                        recentSearchesOption: "hidden",
+                        recentSearchesNonHighlighted: "hidden",
+                        clearButton: "hidden",
+                      }}
                     />
                   </div>
                 </div>

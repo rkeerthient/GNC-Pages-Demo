@@ -76,11 +76,6 @@ const CategoryResults: Template<TemplateRenderProps> = ({
   const { _site, meta, name, description } = document;
   const entityType = meta.entityType.id;
 
-  console.log("data", document);
-  console.log("entityType", entityType);
-  console.log("name", name);
-  console.log("description", description);
-
   const initialFilter: FieldValueStaticFilter = {
     kind: "fieldValue",
     fieldId:

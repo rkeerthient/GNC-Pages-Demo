@@ -9,6 +9,7 @@ import { UniversalResults, universalResultsConfig } from "./UniversalResults";
 import { VerticalNavigator } from "./VerticalNavigator";
 import { VerticalResults } from "./VerticalResults";
 import { Breadcrumbs, Link } from "../Breadcrumbs";
+import { Transition } from "@headlessui/react";
 
 type SearchResultsProps = {
   initialFilter?: FieldValueStaticFilter;
@@ -61,7 +62,11 @@ const SearchResults = ({
       searchActions.executeVerticalQuery();
     } else {
       searchActions.setRestrictVerticals(Object.keys(universalResultsConfig));
-      searchActions.setUniversalLimit({ categories: 5, products: 4 });
+      searchActions.setUniversalLimit({
+        categories: 5,
+        products: 4,
+        articles: 3,
+      });
       searchActions.executeUniversalQuery();
     }
   }, []);
@@ -86,6 +91,23 @@ const SearchResults = ({
 
   return (
     <div className="p-4">
+      {urlQuery && (
+        <div className=" flex justify-center items-center">
+          <h1 className=" mb-4">
+            You searched for...
+            <span className="font-bold">{`"${urlQuery}"`}</span>
+          </h1>
+        </div>
+      )}
+      {/* <Transition
+        show={!isLoading}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-150"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      > */}
       {breadcrumbLinks && <Breadcrumbs links={breadcrumbLinks} />}
       {!initialFilter && <VerticalNavigator verticals={verticals} />}
       {isUniversalSearch && <UniversalResults />}
@@ -97,6 +119,7 @@ const SearchResults = ({
           subCategoryLinks={subCategoryLinks}
         />
       )}
+      {/* </Transition> */}
     </div>
   );
 };

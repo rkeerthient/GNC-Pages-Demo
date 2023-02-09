@@ -24,6 +24,25 @@ const GridSection = ({ results, verticalKey, CardComponent }: SectionProps) => {
   );
 };
 
+const ArticleGridSection = ({
+  results,
+  verticalKey,
+  CardComponent,
+}: SectionProps) => {
+  const Card = CardComponent || StandardCard;
+
+  return (
+    <>
+      <SectionHeader title={verticalKey.toUpperCase()} />
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        {results.map((result) => (
+          <Card key={result.id} result={result} />
+        ))}
+      </div>
+    </>
+  );
+};
+
 const SectionHeader = ({ title }: { title: string }) => {
   return (
     <div className="flex justify-between items-center">
@@ -40,7 +59,7 @@ export const universalResultsConfig = {
   },
   articles: {
     CardComponent: ArticleCard,
-    SectionComponent: StandardSection,
+    SectionComponent: ArticleGridSection,
     label: <SectionHeader title="ARTICLES" />,
   },
   categories: {

@@ -7,14 +7,17 @@ import {
 import {
   provideHeadless,
   Result,
+  useSearchState,
   VerticalResults,
 } from "@yext/search-headless-react";
 import Ce_product from "../types/products";
 import { ProductCard } from "./cards/ProductCard";
+import { useState } from "react";
 
 type SearchBarProps = {
   customCssClasses?: SearchBarCssClasses;
   mobile?: boolean;
+  setVisAutoOpen?: (value: boolean) => void;
 };
 
 const visualSearcher = provideHeadless({
@@ -24,10 +27,15 @@ const visualSearcher = provideHeadless({
   headlessId: "visual-search",
 });
 
-const SearchBar = ({ customCssClasses, mobile = false }: SearchBarProps) => {
+const SearchBar = ({
+  customCssClasses,
+  mobile = false,
+  setVisAutoOpen,
+}: SearchBarProps) => {
   const renderEntityPreviews = (
     autocompleteLoading: boolean,
     verticalKeyToResults: Record<string, VerticalResults>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     dropdownItemProps: {
       onClick: (
         value: string,
@@ -42,8 +50,19 @@ const SearchBar = ({ customCssClasses, mobile = false }: SearchBarProps) => {
     const articleResults = verticalKeyToResults["articles"]?.results;
     const categoryResults = verticalKeyToResults["categories"]?.results;
     const orderedKeys = Object.keys(verticalKeyToResults);
+    const totalResultCount = Object.values(verticalKeyToResults).reduce(
+      (acc, vertical) => acc + vertical.results.length,
+      0
+    );
+    const input = useSearchState((state) => state.query.input);
 
-    return (
+    if (totalResultCount > 0) {
+      setVisAutoOpen && setVisAutoOpen(true);
+    } else {
+      setVisAutoOpen && setVisAutoOpen(false);
+    }
+
+    return totalResultCount > 0 ? (
       <div className="fixed top-[68px] max-h-[calc(100vh-68px)] py-4 left-0 right-0 bg-stone-100 grid grid-cols-2">
         <div className="overflow-y-scroll">
           {orderedKeys.map((key) => {
@@ -52,9 +71,14 @@ const SearchBar = ({ customCssClasses, mobile = false }: SearchBarProps) => {
                 <div key="categories" className="p-4 ">
                   <p className="mb-4 font-bold">CATEGORIES</p>
                   {categoryResults.map((result) => (
-                    <p key={result.id} className="mb-4 text-sm">
-                      {result.name}
-                    </p>
+                    <div key={result.id} className="mb-4">
+                      <a
+                        className=" text-sm hover:underline"
+                        href={result.rawData.slug}
+                      >
+                        {result.name}
+                      </a>
+                    </div>
                   ))}
                 </div>
               );
@@ -73,7 +97,7 @@ const SearchBar = ({ customCssClasses, mobile = false }: SearchBarProps) => {
           })}
         </div>
         <div className="overflow-y-scroll">
-          <div className="sm:order-last" key="products">
+          <div className="sm:order-last grid grid-cols-2" key="products">
             {productResults
               ?.filter(
                 (product, index, self) =>
@@ -83,8 +107,16 @@ const SearchBar = ({ customCssClasses, mobile = false }: SearchBarProps) => {
                 <ProductCard key={result.id} result={result} autocomplete />
               ))}
           </div>
+          <a
+            className="text-gray-900 underline"
+            href={`/results?query=${input}`}
+          >
+            VIEW ALL RESULTS
+          </a>
         </div>
       </div>
+    ) : (
+      <></>
     );
   };
 
@@ -174,6 +206,7 @@ const SearchBar = ({ customCssClasses, mobile = false }: SearchBarProps) => {
     <SB
       customCssClasses={customCssClasses}
       onSearch={handleSearch}
+      hideRecentSearches
       visualAutocompleteConfig={{
         entityPreviewSearcher: visualSearcher,
         includedVerticals: ["products", "articles", "categories"],

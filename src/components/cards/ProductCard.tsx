@@ -22,13 +22,18 @@ const ProductCard = ({ result, autocomplete }: ProductCardProps) => {
           autocomplete ? "flex-row" : "h-[500px] justify-between"
         )}
       >
-        <div>
+        <div className={twMerge(autocomplete ? "flex" : "")}>
           <div
-            className={twMerge("", autocomplete ? "h-20 w-20 sm:mx-auto" : "")}
+            className={twMerge(
+              "",
+              autocomplete ? "h-20 w-20 sm:mx-auto mr-4" : ""
+            )}
           >
             {productImage && (
               <Image
-                // layout="fixed" height={89} width={89}
+                layout={autocomplete ? "fixed" : "intrinsic"}
+                height={89}
+                width={89}
                 image={productImage}
               />
             )}
@@ -43,25 +48,34 @@ const ProductCard = ({ result, autocomplete }: ProductCardProps) => {
             >
               {product.name}
             </a>
-            {product.c_rating && (
-              <ProductReview
-                rating={product.c_rating}
-                reviewCount={product.c_reviewCount}
+            {product.c_paymentOptions && (
+              <ProductPricing
+                c_paymentOptions={product.c_paymentOptions}
+                autocomplete={autocomplete}
               />
             )}
-            {product.c_paymentOptions && (
-              <ProductPricing c_paymentOptions={product.c_paymentOptions} />
+            {!autocomplete && (
+              <>
+                {product.c_rating && (
+                  <ProductReview
+                    rating={product.c_rating}
+                    reviewCount={product.c_reviewCount}
+                  />
+                )}
+              </>
             )}
           </div>
         </div>
-        <div className="pl-3">
-          <a
-            href={product.slug}
-            className="px-8 py-4 font-semibold border border-zinc-900 text-sm hover:bg-zinc-900 hover:text-white"
-          >
-            VIEW OPTIONS
-          </a>
-        </div>
+        {!autocomplete && (
+          <div className="pl-3">
+            <a
+              href={product.slug}
+              className="px-8 py-4 font-semibold border border-zinc-900 text-sm hover:bg-zinc-900 hover:text-white"
+            >
+              VIEW OPTIONS
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );
