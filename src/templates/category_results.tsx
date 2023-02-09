@@ -22,6 +22,7 @@ export const config: TemplateConfig = {
       // "entityType",
       "name",
       "slug",
+      "description",
       "dm_directoryParents.name",
       "dm_directoryParents.slug",
       "dm_directoryChildren.name",
@@ -72,11 +73,13 @@ export const transformProps: TransformProps<TemplateRenderProps> = async (
 const CategoryResults: Template<TemplateRenderProps> = ({
   document,
 }: TemplateRenderProps) => {
-  const { _site, meta, name } = document;
+  const { _site, meta, name, description } = document;
   const entityType = meta.entityType.id;
 
   console.log("data", document);
   console.log("entityType", entityType);
+  console.log("name", name);
+  console.log("description", description);
 
   const initialFilter: FieldValueStaticFilter = {
     kind: "fieldValue",
@@ -110,6 +113,7 @@ const CategoryResults: Template<TemplateRenderProps> = ({
           initialFilter={initialFilter}
           initialVerticalKey={"products"}
           categoryName={name}
+          categoryDescription={description}
           breadcrumbLinks={breadcrumbs.concat({ name })}
           subCategoryLinks={subCategoryLinks}
         />

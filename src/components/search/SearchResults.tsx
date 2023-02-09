@@ -11,11 +11,17 @@ import { VerticalResults } from "./VerticalResults";
 import { Breadcrumbs, Link } from "../Breadcrumbs";
 import { DepartmentList } from "./DepartmentList";
 import { SortDropdown } from "./SortDropdown";
+import {
+  NumericalFacets,
+  Pagination,
+  StandardFacets,
+} from "@yext/search-ui-react";
 
 type SearchResultsProps = {
   initialFilter?: FieldValueStaticFilter;
   initialVerticalKey?: string;
   categoryName?: string;
+  categoryDescription?: string;
   breadcrumbLinks?: Link[];
   subCategoryLinks?: Link[];
 };
@@ -24,6 +30,7 @@ const SearchResults = ({
   initialFilter,
   initialVerticalKey,
   categoryName,
+  categoryDescription,
   breadcrumbLinks,
   subCategoryLinks,
 }: SearchResultsProps) => {
@@ -92,11 +99,15 @@ const SearchResults = ({
       {isUniversalSearch && <UniversalResults />}
       {verticalKey && (
         <div className="flex py-4">
-          <div className="w-1/5">
+          <div className="w-1/5 mt-12">
             <DepartmentList departmentLinks={subCategoryLinks} />
+            <div className="w-full h-px bg-gray-200 my-4" />
+
+            <StandardFacets excludedFieldIds={["c_parentCategory.name"]} />
+            <NumericalFacets />
           </div>
           <div className="w-4/5">
-            <div className="flex justify-between">
+            <div className="flex justify-between my-2.5">
               <div className="flex space-x-4 items-center">
                 <h2 className="text-2xl font-semibold">{categoryName}</h2>
                 {!searchLoading && (
@@ -105,7 +116,17 @@ const SearchResults = ({
               </div>
               <SortDropdown />
             </div>
+            <p className="text-lg text-gray-500 mb-2.5">
+              {categoryDescription}
+            </p>
+
             <VerticalResults verticalKey={verticalKey} />
+            <Pagination
+              customCssClasses={{
+                paginationContainer: "pt-12 pb-4",
+                selectedLabel: "bg-gray-900 text-white",
+              }}
+            />
           </div>
         </div>
       )}

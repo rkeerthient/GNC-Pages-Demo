@@ -18,6 +18,7 @@ export default interface Ce_article {
 	landingPageUrl?: string,
 	name: string,
 	c_articleCategory?: string,
+	c_articlePhoto?: Image,
 	c_author?: string,
 	c_authorImage?: Image,
 	c_authorInfo?: string,

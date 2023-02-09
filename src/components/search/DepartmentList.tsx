@@ -16,14 +16,14 @@ const DepartmentList = ({ departmentLinks }: DepartmentListProps) => {
       <p>
         <button
           type="button"
-          className="text-sm font-medium text-gray-700 hover:text-gray-800"
+          className="text-neutral-dark text-sm font-medium text-left"
           onClick={() => setIsOpen(!isOpen)}
         >
           Departments
         </button>
       </p>
       <div className="mt-2">
-        <div className="max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+        <div className="py-1 text-base  ring-opacity-5  focus:outline-none sm:text-sm">
           {departmentLinks.map((link) => (
             <a
               key={link.name}

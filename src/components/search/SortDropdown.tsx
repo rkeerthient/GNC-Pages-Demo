@@ -42,6 +42,22 @@ const sortConfig: Record<string, { label: string; sortBy: SortBy }> = {
       type: SortType.Field,
     },
   },
+  rating_asc: {
+    label: "Rating: Low to High",
+    sortBy: {
+      field: "c_rating",
+      direction: Direction.Ascending,
+      type: SortType.Field,
+    },
+  },
+  rating_desc: {
+    label: "Rating: High to Low",
+    sortBy: {
+      field: "c_rating",
+      direction: Direction.Descending,
+      type: SortType.Field,
+    },
+  },
 };
 
 function classNames(...classes) {
