@@ -9,13 +9,6 @@ import { UniversalResults, universalResultsConfig } from "./UniversalResults";
 import { VerticalNavigator } from "./VerticalNavigator";
 import { VerticalResults } from "./VerticalResults";
 import { Breadcrumbs, Link } from "../Breadcrumbs";
-import { DepartmentList } from "./DepartmentList";
-import { SortDropdown } from "./SortDropdown";
-import {
-  NumericalFacets,
-  Pagination,
-  StandardFacets,
-} from "@yext/search-ui-react";
 
 type SearchResultsProps = {
   initialFilter?: FieldValueStaticFilter;
@@ -49,8 +42,7 @@ const SearchResults = ({
     (state) => state.meta.searchType === "universal"
   );
   const verticalKey = useSearchState((state) => state.vertical.verticalKey);
-  const resultsCount = useSearchState((state) => state.vertical.resultsCount);
-  const searchLoading = useSearchState((state) => state.searchStatus.isLoading);
+  const isLoading = useSearchState((state) => state.searchStatus.isLoading);
 
   // when this component is mounted, grab the query from the URL and perform a search
   useEffect(() => {
@@ -98,37 +90,12 @@ const SearchResults = ({
       {!initialFilter && <VerticalNavigator verticals={verticals} />}
       {isUniversalSearch && <UniversalResults />}
       {verticalKey && (
-        <div className="flex py-4">
-          <div className="w-1/5 mt-12">
-            <DepartmentList departmentLinks={subCategoryLinks} />
-            <div className="w-full h-px bg-gray-200 my-4" />
-
-            <StandardFacets excludedFieldIds={["c_parentCategory.name"]} />
-            <NumericalFacets />
-          </div>
-          <div className="w-4/5">
-            <div className="flex justify-between my-2.5">
-              <div className="flex space-x-4 items-center">
-                <h2 className="text-2xl font-semibold">{categoryName}</h2>
-                {!searchLoading && (
-                  <p className="text-xs text-gray-500">{`(${resultsCount} Results)`}</p>
-                )}
-              </div>
-              <SortDropdown />
-            </div>
-            <p className="text-lg text-gray-500 mb-2.5">
-              {categoryDescription}
-            </p>
-
-            <VerticalResults verticalKey={verticalKey} />
-            <Pagination
-              customCssClasses={{
-                paginationContainer: "pt-12 pb-4",
-                selectedLabel: "bg-gray-900 text-white",
-              }}
-            />
-          </div>
-        </div>
+        <VerticalResults
+          categoryName={categoryName}
+          categoryDescription={categoryDescription}
+          verticalKey={verticalKey}
+          subCategoryLinks={subCategoryLinks}
+        />
       )}
     </div>
   );
