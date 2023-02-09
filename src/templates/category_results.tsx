@@ -114,7 +114,7 @@ const CategoryResults: Template<TemplateRenderProps> = ({
           initialVerticalKey={"products"}
           categoryName={name}
           categoryDescription={description}
-          breadcrumbLinks={breadcrumbs.concat({ name })}
+          breadcrumbLinks={breadcrumbs ? breadcrumbs.concat({ name }) : []}
           subCategoryLinks={subCategoryLinks}
         />
       </PageLayout>
