@@ -12,7 +12,6 @@ import {
 } from "@yext/search-headless-react";
 import Ce_product from "../types/products";
 import { ProductCard } from "./cards/ProductCard";
-import { useState } from "react";
 
 type SearchBarProps = {
   customCssClasses?: SearchBarCssClasses;
@@ -193,8 +192,12 @@ const SearchBar = ({
     verticalKey?: string;
     query?: string;
   }) => {
-    // replace the url with /results?query=${query}
-    // this will trigger a page refresh and the results page will be rendered
+    // if the query equals the string "track my order", redirect to this url: https://www.gnc.com/check-order
+    if (searchEventData.query === "track my order") {
+      window.location.href = "https://www.gnc.com/check-order";
+      return;
+    }
+
     const { verticalKey, query } = searchEventData;
     const url = new URL(window.location.href);
     url.pathname = "/results";

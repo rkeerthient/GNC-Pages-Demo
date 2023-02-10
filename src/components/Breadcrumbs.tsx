@@ -26,8 +26,6 @@ const Breadcrumbs = ({ links }: BreadcrumbsProps) => {
               )}
               {link.href ? (
                 <a
-                  // href should completely replace the current URL
-                  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-href
                   href={`/${link.href}`}
                   className="ml-4 text-xs font-medium text-gray-900 underline hover:text-gray-500"
                 >
