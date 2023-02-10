@@ -11,6 +11,10 @@ type BreadcrumbsProps = {
 };
 
 const Breadcrumbs = ({ links }: BreadcrumbsProps) => {
+  React.useEffect(() => {
+    const ls = links;
+    console.log(ls);
+  }, []);
   return (
     <nav className="flex py-5" aria-label="Breadcrumb">
       <ol role="list" className="flex items-center space-x-4 mb-4">
@@ -22,7 +26,9 @@ const Breadcrumbs = ({ links }: BreadcrumbsProps) => {
               )}
               {link.href ? (
                 <a
-                  href={link.href}
+                  // href should completely replace the current URL
+                  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attr-href
+                  href={`/${link.href}`}
                   className="ml-4 text-xs font-medium text-gray-900 underline hover:text-gray-500"
                 >
                   {link.name}
