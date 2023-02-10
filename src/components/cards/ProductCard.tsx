@@ -48,12 +48,6 @@ const ProductCard = ({ result, autocomplete }: ProductCardProps) => {
             >
               {product.name}
             </a>
-            {product.c_paymentOptions && (
-              <ProductPricing
-                c_paymentOptions={product.c_paymentOptions}
-                autocomplete={autocomplete}
-              />
-            )}
             {!autocomplete && (
               <>
                 {product.c_rating && (
@@ -64,10 +58,16 @@ const ProductCard = ({ result, autocomplete }: ProductCardProps) => {
                 )}
               </>
             )}
+            {product.c_paymentOptions && (
+              <ProductPricing
+                c_paymentOptions={product.c_paymentOptions}
+                autocomplete={autocomplete}
+              />
+            )}
           </div>
         </div>
         {!autocomplete && (
-          <div className="pl-3">
+          <div className="pl-3 mt-4">
             <a
               href={product.slug}
               className="px-8 py-4 font-semibold border border-zinc-900 text-sm hover:bg-zinc-900 hover:text-white"

@@ -9,7 +9,6 @@ import { UniversalResults, universalResultsConfig } from "./UniversalResults";
 import { VerticalNavigator } from "./VerticalNavigator";
 import { VerticalResults } from "./VerticalResults";
 import { Breadcrumbs, Link } from "../Breadcrumbs";
-import { Transition } from "@headlessui/react";
 
 type SearchResultsProps = {
   initialFilter?: FieldValueStaticFilter;

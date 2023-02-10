@@ -58,6 +58,12 @@ const sortConfig: Record<string, { label: string; sortBy: SortBy }> = {
       type: SortType.Field,
     },
   },
+  relevance: {
+    label: "Relevance",
+    sortBy: {
+      type: SortType.Relevance,
+    },
+  },
 };
 
 function classNames(...classes) {
@@ -65,7 +71,7 @@ function classNames(...classes) {
 }
 
 const SortDropdown = () => {
-  const [selected, setSelected] = useState(sortConfig["alpha_asc"]);
+  const [selected, setSelected] = useState(sortConfig["relevance"]);
 
   const searchActions = useSearchActions();
 

@@ -2,14 +2,17 @@ import * as React from "react";
 import {
   SectionProps,
   StandardCard,
-  StandardSection,
   UniversalResults as UR,
 } from "@yext/search-ui-react";
 import { CategoryCard } from "../cards/CategoryCard";
 import { ProductCard } from "../cards/ProductCard";
 import { ArticleCard } from "../cards/ArticleCard";
 
-const GridSection = ({ results, verticalKey, CardComponent }: SectionProps) => {
+const ProductSection = ({
+  results,
+  verticalKey,
+  CardComponent,
+}: SectionProps) => {
   const Card = CardComponent || StandardCard;
 
   return (
@@ -24,7 +27,7 @@ const GridSection = ({ results, verticalKey, CardComponent }: SectionProps) => {
   );
 };
 
-const ArticleGridSection = ({
+const ArticleSection = ({
   results,
   verticalKey,
   CardComponent,
@@ -35,6 +38,25 @@ const ArticleGridSection = ({
     <>
       <SectionHeader title={verticalKey.toUpperCase()} />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        {results.map((result) => (
+          <Card key={result.id} result={result} />
+        ))}
+      </div>
+    </>
+  );
+};
+
+const CategorySection = ({
+  results,
+  verticalKey,
+  CardComponent,
+}: SectionProps) => {
+  const Card = CardComponent || StandardCard;
+
+  return (
+    <>
+      <SectionHeader title={verticalKey.toUpperCase()} />
+      <div className="grid grid-cols-1">
         {results.map((result) => (
           <Card key={result.id} result={result} />
         ))}
@@ -54,24 +76,24 @@ const SectionHeader = ({ title }: { title: string }) => {
 export const universalResultsConfig = {
   products: {
     CardComponent: ProductCard,
-    SectionComponent: GridSection,
+    SectionComponent: ProductSection,
     label: <SectionHeader title="PRODUCTS" />,
   },
   articles: {
     CardComponent: ArticleCard,
-    SectionComponent: ArticleGridSection,
+    SectionComponent: ArticleSection,
     label: <SectionHeader title="ARTICLES" />,
   },
   categories: {
     CardComponent: CategoryCard,
-    SectionComponent: StandardSection,
+    SectionComponent: CategorySection,
     label: <SectionHeader title="CATEGORIES" />,
   },
 };
 
 const UniversalResults = () => {
   return (
-    <div className="max-w-7xl px-4 mx-auto">
+    <div className="max-w-7xl p-4 mx-auto">
       <UR verticalConfigMap={universalResultsConfig} />
     </div>
   );

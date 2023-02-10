@@ -41,7 +41,11 @@ const VerticalResults = ({
           <DepartmentList departmentLinks={subCategoryLinks} />
           <div className="w-full h-px bg-gray-200 my-4" />
           <StandardFacets excludedFieldIds={["c_parentCategory.name"]} />
-          <NumericalFacets />
+          <NumericalFacets
+            customCssClasses={{ rangeInputContainer: "hidden" }}
+            includedFieldIds={["c_rating"]}
+          />
+          <NumericalFacets includedFieldIds={["c_paymentOptions.price"]} />
         </div>
       )}
       <div className={twMerge(verticalKey === "products" && "w-4/5")}>

@@ -4,13 +4,12 @@ import Ce_category from "../../types/categories";
 
 const CategoryCard = ({ result }: CardProps<Ce_category>) => {
   const category = result.rawData;
-
   return (
-    <div className="flex px-4 py-1">
-      <a href={category.slug} className="hover:underline text-sm">
+    <a href={category.slug} className="text-xl text-center">
+      <div className="hover:cursor-pointer flex flex-col justify-between px-4 py-4 border-2 m-4 border-[#1a1a1a] items-center hover:bg-[#1a1a1a] hover:text-white text-[#1a1a1a] max-w-sm">
         {category.name}
-      </a>
-    </div>
+      </div>
+    </a>
   );
 };
 
